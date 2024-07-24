@@ -19,7 +19,7 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER_ID:
-      console.log('Setting User ID:', action.payload);  // Debugging line
+      console.log('Setting User ID:', action.payload); 
       return { ...state, isLoggedIn: true, id: action.payload, loading: false, error: null };
       
     case SIGNIN_REQUEST:

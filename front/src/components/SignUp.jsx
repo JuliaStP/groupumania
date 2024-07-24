@@ -22,20 +22,25 @@ class SignUp extends React.Component {
     const { email, firstName, lastName, password } = this.state;
 
     if (!email || !password || !firstName || !lastName) {
-      this.setState({ error: 'All fields are required' });
+      this.setState({ error: "All fields are required" });
       return;
     }
 
     try {
-      const success = await this.props.signUp(email, firstName, lastName, password);
+      const success = await this.props.signUp(
+        email,
+        firstName,
+        lastName,
+        password
+      );
       if (success) {
-        this.props.navigate('/main');
+        this.props.navigate("/main");
       } else {
-        this.setState({ error: 'Sign up failed, check your email address' });
+        this.setState({ error: "Sign up failed, check your email address" });
       }
     } catch (error) {
       this.setState({ error: error.message });
-      console.error('Error during signup:', error);
+      console.error("Error during signup:", error);
     }
   };
 
@@ -49,7 +54,7 @@ class SignUp extends React.Component {
         <div className="form signup-form">
           <h2>Sign Up</h2>
           Already registered? <Link to="/">Sign In</Link>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
+          {error && <p style={{ color: "red" }}>{error}</p>}
           <form onSubmit={this.authenticate} className="signup">
             <FormLabel className="label">
               Email*
@@ -103,11 +108,6 @@ class SignUp extends React.Component {
   }
 }
 
-// export default connect(
-//   (state) => ({ isLoggedIn: state.auth.isLoggedIn }),
-//   { signUp }
-// )(withNavigation(SignUp));
-
 const mapStateToProps = (state) => ({
   isLoggedIn: state.auth.isLoggedIn,
 });
@@ -116,4 +116,7 @@ const mapDispatchToProps = {
   signUp,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(SignUp));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withNavigation(SignUp));

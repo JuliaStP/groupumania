@@ -20,20 +20,20 @@ class SignIn extends React.Component {
     const { email, password } = this.state;
 
     if (!email || !password) {
-      this.setState({ error: 'Email and password are required' });
+      this.setState({ error: "Email and password are required" });
       return;
     }
 
     try {
       const success = await this.props.signIn(email, password);
       if (success) {
-        this.props.navigate('/main');
+        this.props.navigate("/main");
       } else {
-        this.setState({ error: 'Login failed' });
+        this.setState({ error: "Login failed" });
       }
     } catch (error) {
       this.setState({ error: error.message });
-      console.error('Error during signin:', error);
+      console.error("Error during signin:", error);
     }
   };
 
@@ -45,10 +45,12 @@ class SignIn extends React.Component {
           <img src={companyLogo} alt="Company Logo" />
         </div>
         <div className="form login-form">
-          {this.props.isLoggedIn ? "You are logged in" : "You are not logged in"}
+          {this.props.isLoggedIn
+            ? "You are logged in"
+            : "You are not logged in"}
           <h2>Sign In</h2>
           New User? <Link to="/signup">Sign Up</Link>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
+          {error && <p style={{ color: "red" }}>{error}</p>}
           <form onSubmit={this.authenticate} className="login">
             <FormLabel className="label">
               Email*
@@ -88,4 +90,7 @@ const mapDispatchToProps = {
   signIn,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(SignIn));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withNavigation(SignIn));

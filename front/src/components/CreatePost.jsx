@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { createPost } from '../api';
+import React, { useState } from "react";
+import { createPost } from "../api";
 import "../styles/Blog.css";
 import "../styles/SignIn.css";
 import "../styles/Profile.css";
@@ -7,39 +7,39 @@ import FormLabel from "@material-ui/core/FormLabel";
 import Input from "@material-ui/core/Input";
 
 function CreatePost({ username }) {
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [content, setContent] = useState('');
-  const [img, setImg] = useState(null);  // Change to handle file object
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [content, setContent] = useState("");
+  const [img, setImg] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Form submitted with:', { title, author, content, img });
+    console.log("Form submitted with:", { title, author, content, img });
 
     const formData = new FormData();
-    formData.append('title', title);
-    formData.append('author', author);
-    formData.append('content', content);
-    formData.append('image', img);  // Append file object with key 'image'
+    formData.append("title", title);
+    formData.append("author", author);
+    formData.append("content", content);
+    formData.append("image", img);
 
     try {
       const success = await createPost(formData);
       if (success) {
-        console.log('Post created successfully!');
-        setTitle('');
-        setAuthor('');
-        setContent('');
+        console.log("Post created successfully!");
+        setTitle("");
+        setAuthor("");
+        setContent("");
         setImg(null);
       } else {
-        console.error('Failed to create post');
+        console.error("Failed to create post");
       }
     } catch (error) {
-      console.error('Error during post creation:', error);
+      console.error("Error during post creation:", error);
     }
   };
 
   return (
-    <div className='container'>
+    <div className="container">
       <h1>Create a New Post</h1>
       <form onSubmit={handleSubmit}>
         <FormLabel className="label" htmlFor="title">
@@ -84,18 +84,19 @@ function CreatePost({ username }) {
 
         <FormLabel className="label" htmlFor="img">
           Picture:
-          <Input 
+          <Input
             className="input"
-            type="file" 
-            id="img" 
-            onChange={(e) => setImg(e.target.files[0])}  // Handle file change
+            type="file"
+            id="img"
+            onChange={(e) => setImg(e.target.files[0])}
             name="img"
-            required
           />
         </FormLabel>
 
         <div className="btn-container btn-main">
-          <button className='button btn' type="submit">Post</button>
+          <button className="button btn" type="submit">
+            Post
+          </button>
         </div>
       </form>
     </div>

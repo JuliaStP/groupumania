@@ -10,15 +10,14 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors({
-    origin: 'http://localhost:3001', // Allow this origin
-    methods: 'GET,POST,PUT,DELETE,OPTIONS', // Allow these HTTP methods
-    allowedHeaders: 'Content-Type,Authorization' // Allow these headers
+    origin: 'http://localhost:3001', 
+    methods: 'GET,POST,PUT,DELETE,OPTIONS', 
+    allowedHeaders: 'Content-Type,Authorization' 
   }));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(bodyParser.json());
 app.use('/api', userRoutes);
 app.use('/api', blogPostRoutes);
-// app.use('/');
 
 sequelize.sync().then(() => {
     app.listen(PORT, () => {
