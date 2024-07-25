@@ -20,7 +20,10 @@ function CreatePost({ username }) {
     formData.append("title", title);
     formData.append("author", author);
     formData.append("content", content);
-    formData.append("image", img);
+
+    if (img) {
+      formData.append("image", img);
+    }
 
     try {
       const success = await createPost(formData);
@@ -104,3 +107,4 @@ function CreatePost({ username }) {
 }
 
 export default CreatePost;
+

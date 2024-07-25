@@ -24,6 +24,8 @@ function Blog() {
           isUnread: !readPosts[post.id],
         }));
 
+        postsWithStatus.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
         setPosts(postsWithStatus);
       } catch (error) {
         setError(error.message);
@@ -61,12 +63,12 @@ function Blog() {
         {posts.map((post, index) => (
           <div
             className={`post ${post.isUnread ? "unread" : ""}`}
-            key={index}
+            key={post.id} 
             onClick={() => handlePostClick(index)}
           >
             <h2>{post.title}</h2>
             <h1>Author: {post.author}</h1>
-            <img src={post.img} alt={post.title} style={{ maxWidth: "100%" }} />
+            <img src={post.img} alt="" style={{ maxWidth: "100%" }} />
             <p>{post.content}</p>
           </div>
         ))}

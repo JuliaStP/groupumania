@@ -3,7 +3,6 @@ const blogPostController = require('../controllers/blogPostController');
 const router = express.Router();
 
 const multer = require('../config/multer-config');
-const auth = require('../config/auth');
 
 router.post('/blogposts', multer, blogPostController.createBlogPost);
 router.get('/blogposts', blogPostController.getBlogPosts);

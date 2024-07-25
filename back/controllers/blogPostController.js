@@ -2,16 +2,18 @@ const { BlogPost } = require('../models');
 
 exports.createBlogPost = async (req, res) => {
     try {
-        if (!req.file) {
-            return res.status(400).json({ error: 'No file uploaded' });
-        }
         const url = req.protocol + '://' + req.get('host');
-        const blogPost = await BlogPost.create({
+        const blogPostData = {
             title: req.body.title,
             content: req.body.content,
             author: req.body.author,
-            img: url + '/images/' + req.file.filename,
-        });
+        };
+
+        if (req.file) {
+            blogPostData.img = url + '/images/' + req.file.filename;
+        }
+
+        const blogPost = await BlogPost.create(blogPostData);
         res.status(201).json(blogPost);
     } catch (error) {
         res.status(500).json({ error: error.message });
