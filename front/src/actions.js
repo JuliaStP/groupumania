@@ -1,4 +1,4 @@
-import { serverSignup, serverLogin, createPost, serverDeleteUser } from "./api";
+import { serverSignup, serverLogin, createPost, serverDeleteUser, deletePostById } from "./api";
 
 export const LOG_OUT = "LOG_OUT";
 export const SET_USER_ID = "SET_USER_ID ";
@@ -18,6 +18,8 @@ export const DELETE_USER_FAILURE = "DELETE_USER_FAILURE";
 export const POST_REQUEST = "POST_REQUEST";
 export const POST_SUCCESS = "POST_SUCCESS";
 export const POST_FAILURE = "POST_FAILURE";
+
+export const DELETE_POST = "DELETE_POST"
 
 export const setUserId = (id) => ({
   type: "SET_USER_ID",
@@ -126,4 +128,14 @@ export const writePost = (title, content, author) => {
       });
     }
   };
+};
+
+export const deletePost = async (postId) => {
+  try {
+    const response = await deletePostById(postId);
+    return response;
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    throw error;
+  }
 };

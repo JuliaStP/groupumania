@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import App from './components/App';
 import { MuiThemeProvider } from "@material-ui/core/styles";
-// import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import { theme } from "loft-taxi-mui-theme"; // Импортируем саму тему
+import { theme } from "loft-taxi-mui-theme";
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";

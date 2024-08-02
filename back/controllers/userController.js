@@ -59,7 +59,6 @@ exports.signup = async (req, res, next) => {
 };
 
 // for profile
-
 exports.createUser = async (req, res) => {
     try {
         const user = await User.create(req.body);

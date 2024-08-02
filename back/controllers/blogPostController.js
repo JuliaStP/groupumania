@@ -29,6 +29,7 @@ exports.getBlogPosts = async (req, res) => {
     }
 };
 
+//future updates
 exports.getBlogPostById = async (req, res) => {
     try {
         const blogPost = await BlogPost.findByPk(req.params.id);

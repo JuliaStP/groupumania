@@ -1,13 +1,10 @@
+//in progress
 import React from "react";
 import { Link } from "react-router-dom";
-
-// Icons
 import like from "../assets/thumbs-up-solid.svg";
 import dislike from "../assets/thumbs-down-solid.svg";
 import comment from "../assets/comment-regular.svg";
 import comments from "../assets/comments-regular.svg";
-
-// Styles
 import styles from "../styles/PostBtn.css";
 
 const PostBtn = (props) => {

@@ -92,3 +92,13 @@ export const createPost = async (formData) => {
     return false;
   }
 };
+
+export const deletePostById = async (postId) => {
+  const response = await fetch(`http://localhost:3000/api/blogposts/${postId}`, {
+    method: "DELETE",
+  });
+  if (!response.ok) {
+    throw new Error("Failed to delete post");
+  }
+  return response.json();
+};

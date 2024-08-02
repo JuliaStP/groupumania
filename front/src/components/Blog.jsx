@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { deletePostById } from "../api"; 
 import "../styles/Profile.css";
 import "../styles/Blog.css";
 import "../styles/PostBtn.css";
+import "../styles/SignIn.css";
 
-function Blog() {
+function Blog({ username }) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -48,6 +50,20 @@ function Blog() {
     localStorage.setItem("readPosts", JSON.stringify(readPosts));
   };
 
+// in progress
+  const handleDeletePost = async (postId) => {
+    try {
+      const response = await deletePostById(postId);
+      if (response.success) {
+        setPosts(posts.filter((post) => post.id !== postId));
+      } else {
+        console.error("Failed to delete post");
+      }
+    } catch (error) {
+      console.error("Error during post deletion:", error);
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -63,13 +79,24 @@ function Blog() {
         {posts.map((post, index) => (
           <div
             className={`post ${post.isUnread ? "unread" : ""}`}
-            key={post.id} 
+            key={post.id}
             onClick={() => handlePostClick(index)}
           >
             <h2>{post.title}</h2>
             <h1>Author: {post.author}</h1>
-            <img src={post.img} alt="" style={{ maxWidth: "100%" }} />
+            <img src={post.img} alt={post.title} style={{ maxWidth: "100%" }} />
             <p>{post.content}</p>
+            {post.author === username && (
+              <button 
+                className="button btn" 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDeletePost(post.id);
+                }}
+              >
+                Delete
+              </button>
+            )}
           </div>
         ))}
       </div>
